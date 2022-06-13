@@ -16,24 +16,24 @@ int conta_linee(FILE* fp) {
 }
 
 void leggi_studente(FILE* fp, Studente_extra* s) {
-
+    printf("ARGH");
     fscanf(fp, "%s %s %s", s->nome, s->cognome, s->stato);
     int j;
 
-    if (s->stato == "Laureato") {
-        fscanf (fp, " %f", s->media);
-    } else {
+    if (s->stato == "Non_laureato") {
         for(j=0; j<N_VOTI; j++){
             fscanf(fp, "%d", s->voti+j);
         }
+    } else {
+        fscanf (fp, " %f", s->media);
     }
-    rewind(fp);
+
     return;
 }
 
 void scrivi_studente(FILE* fp, Studente_extra s) {
     
-    fprintf(fp, "%s %s", s.nome, s.cognome);
+    fprintf(fp, "%s %s %s", s.nome, s.cognome, s.stato);
     int j;
 
     if (s.stato == "Non_laureato") {
@@ -43,13 +43,14 @@ void scrivi_studente(FILE* fp, Studente_extra s) {
     } else {
         fprintf(fp, " %f", s.media);
     }
+
     fprintf(fp, "\n");
-    rewind(fp);
+
     return;
 }
 
 void print_studente (Studente_extra s) {
-
+    
     int i;
 
     printf("%s %s %s", s.nome, s.cognome, s.stato);
