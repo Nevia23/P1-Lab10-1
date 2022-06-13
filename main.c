@@ -18,7 +18,7 @@ int main(){
             leggi_studente(fp, s+i);
             print_studente(s[i]);
         }
-
+        /*
         fclose(fp);
         printf("File letto\n\n");
         
@@ -35,16 +35,6 @@ int main(){
         }
 
         fclose(fp);
+        */
     }
 }
-
-CC = gcc
-
-%.o: %.c
-	${CC} -c $< -o $@
-
-main: studenti_laureati.o main.c
-	${CC} studenti_laureati.o main.c -o $@
-
-clear:
-	rm *.o
