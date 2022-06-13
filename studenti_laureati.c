@@ -16,15 +16,17 @@ int conta_linee(FILE* fp) {
 }
 
 void leggi_studente(FILE* fp, Studente_extra* s) {
-    printf("ARGH");
+    
     fscanf(fp, "%s %s %s", s->nome, s->cognome, s->stato);
     int j;
 
     if (s->stato == "Non_laureato") {
+        
         for(j=0; j<N_VOTI; j++){
             fscanf(fp, "%d", s->voti+j);
         }
     } else {
+        printf("ARGH");
         fscanf (fp, " %f", s->media);
     }
 
