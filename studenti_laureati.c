@@ -57,9 +57,15 @@ void print_studente (Studente_extra s) {
     
     int i;
 
-    printf("%s %s %s", s.nome, s.cognome, s.stato);
+    printf("%s %s", s.nome, s.cognome);
+
+    if (s.tipo == Non_laureato) {
+        printf(" Non_laureato");
+    } else {
+        printf(" Laureato");
+    }
     
-    if (strcmp(s.stato, "Non_laureato") == 0) {
+    if (s.tipo == Non_laureato) {
         for(i=0; i<N_VOTI; i++){
             printf(" %d", s.stato.voti[i]);
         }
