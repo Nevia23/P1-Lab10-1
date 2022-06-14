@@ -17,15 +17,18 @@ int conta_linee(FILE* fp) {
 
 void leggi_studente(FILE* fp, Studente_extra* s) {
     
-    fscanf(fp, "%s %s %s", s->nome, s->cognome, s->stato);
+    char tipo[13];
+    fscanf(fp, "%s %s", s->nome, s->cognome);
+    fscanf(fp, "%s", tipo);
     int j;
 
-    if (strcmp(s->stato, "Non_laureato") == 0) {
-        
+    if (strcmp(tipo, "Non_laureato") == 0) {
+        s->tipo = Non_laureato;
         for(j=0; j<N_VOTI; j++){
             fscanf(fp, "%d", s->stato.voti+j);
         }
     } else {
+        s->tipo = Laureato;
         fscanf (fp, "%f", &(s->stato.media));
     }
 
@@ -34,7 +37,7 @@ void leggi_studente(FILE* fp, Studente_extra* s) {
 
 void scrivi_studente(FILE* fp, Studente_extra s) {
     
-    fprintf(fp, "%s %s %s", s.nome, s.cognome, s.stato);
+    fprintf(fp, "%s %s %s", s.nome, s.cognome, s.tipo);
     int j;
 
     if (s.tipo == Non_laureato) {

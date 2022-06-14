@@ -14,7 +14,7 @@ int main(){
 
         rewind(fp);
 
-        for(i=0; i<n_stud; i++){
+        for(i=0; i < n_stud; i++){
             leggi_studente(fp, s+i);
             print_studente(s[i]);
         }
