@@ -23,6 +23,7 @@ int main(){
         
         for (i = 0; i < n_stud; i++) {
             if (s[i].tipo == Non_laureato && completato_percorso(s[i]) == 1) {
+                s[i].stato.media = calcola_media (s[i]);
                 s[i].tipo = Laureato;
             }
         }

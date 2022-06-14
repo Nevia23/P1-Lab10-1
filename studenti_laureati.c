@@ -49,7 +49,7 @@ void scrivi_studente(FILE* fp, Studente_extra s) {
     } else {
 
         fprintf(fp, " Laureato");
-        fprintf(fp, " %f", s.stato.media);
+        fprintf(fp, " %2.1f", s.stato.media);
     }
 
     fprintf(fp, "\n");
@@ -70,11 +70,13 @@ void print_studente (Studente_extra s) {
     }
     
     if (s.tipo == Non_laureato) {
+        
         for(i=0; i<N_VOTI; i++){
             printf(" %d", s.stato.voti[i]);
         }
     } else {
-        printf(" %f", s.stato.media);
+        
+        printf(" %2.1f", s.stato.media);
     }
 
     printf("\n");
@@ -85,23 +87,18 @@ float calcola_media(Studente_extra s) {
     float somma = 0, count = 0;
 
     for (i = 0; i < N_VOTI; i++) {
-        if (s.stato.voti[i] != -1) {
-            somma = somma + s.stato.voti[i];
-            count++;
-        }
+        somma = somma + s.stato.voti[i];
+        count++;
     }
-    
-    if (count != 0) {
-        float media = somma / count;
-        return media;
-    } else {
-        return -1;
-    }
+
+    float media = somma / count;
+    return media;
 }
 
 int sufficienza_studente(Studente_extra s) {
 
-    if (calcola_media(s) >= 18) {
+    float media = calcola_media(s);
+    if (media >= 18) {
         return 1;
     } else {
         return 0;
@@ -110,20 +107,25 @@ int sufficienza_studente(Studente_extra s) {
 
 int completato_percorso(Studente_extra s) {
 
-    int i, completato = 0;
+    int i, completato = 1;
+
+    if(s.tipo == Laureato){
+        return 1;
+    }
 
     if (sufficienza_studente(s) == 1) {
 
-        for (i = 0; i < N_VOTI && completato == 0; i++) {
+        for (i = 0; i < N_VOTI && completato == 1; i++) {
 
             if (s.stato.voti[i] == -1) {
-                completato = 1;
+                completato = 0;
             }
         }
+    } else {
+        completato = 0;
     }
 
     if (completato == 1) {
-        s.stato.media = calcola_media (s);
         return 1;
     } else {
         return 0;
