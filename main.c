@@ -18,22 +18,23 @@ int main(){
             leggi_studente(fp, s+i);
             print_studente(s[i]);
         }
-        /*
+        
         fclose(fp);
         
         for (i = 0; i < n_stud; i++) {
-            if (completato_percorso(s[i]) == 0) {
+            if (s[i].tipo == Non_laureato && completato_percorso(s[i]) == 0) {
+                s[i].stato.media = calcola_media(s[i]);
                 s[i].tipo = Laureato;
             }
         }
 
         fp = fopen("studenti_ord.txt","w");
 
-        for(i=n_stud-1; i>=0; i--){
+        for(i = 0; i < n_stud; i++){
             scrivi_studente(fp, s[i]);
         }
 
         fclose(fp);
-        */
+        
     }
 }

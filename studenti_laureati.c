@@ -38,11 +38,11 @@ void scrivi_studente(FILE* fp, Studente_extra s) {
     int j;
 
     if (s.tipo == Non_laureato) {
-        for(j=0; j<N_VOTI; j++){
-            fprintf(fp, " %d", s.stato.voti[j]);
+        for(j=0; j < N_VOTI; j++){
+            fprintf(fp, "%d", s.stato.voti[j]);
         }
     } else {
-        fprintf(fp, " %f", s.stato.media);
+        fprintf(fp, "%f", s.stato.media);
     }
 
     fprintf(fp, "\n");
