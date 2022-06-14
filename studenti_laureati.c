@@ -20,14 +20,13 @@ void leggi_studente(FILE* fp, Studente_extra* s) {
     fscanf(fp, "%s %s %s", s->nome, s->cognome, s->stato);
     int j;
 
-    if (s->stato == "Non_laureato") {
+    if (strcmp(s->stato, "Non_laureato") == 0) {
         
         for(j=0; j<N_VOTI; j++){
-            fscanf(fp, "%d", s->voti+j);
+            fscanf(fp, "%d", s->stato.voti+j);
         }
     } else {
-        printf("ARGH");
-        fscanf (fp, " %f", s->media);
+        fscanf (fp, "%f", &(s->stato.media));
     }
 
     return;
@@ -38,12 +37,12 @@ void scrivi_studente(FILE* fp, Studente_extra s) {
     fprintf(fp, "%s %s %s", s.nome, s.cognome, s.stato);
     int j;
 
-    if (s.stato == "Non_laureato") {
+    if (s.tipo == Non_laureato) {
         for(j=0; j<N_VOTI; j++){
-            fprintf(fp, " %d", s.voti[j]);
+            fprintf(fp, " %d", s.stato.voti[j]);
         }
     } else {
-        fprintf(fp, " %f", s.media);
+        fprintf(fp, " %f", s.stato.media);
     }
 
     fprintf(fp, "\n");
@@ -57,12 +56,12 @@ void print_studente (Studente_extra s) {
 
     printf("%s %s %s", s.nome, s.cognome, s.stato);
     
-    if (s.stato == "Non_laureato") {
+    if (strcmp(s.stato, "Non_laureato") == 0) {
         for(i=0; i<N_VOTI; i++){
-            printf(" %d", s.voti[i]);
+            printf(" %d", s.stato.voti[i]);
         }
     } else {
-        printf(" %f", s.media);
+        printf(" %f", s.stato.media);
     }
 
     printf("\n");
@@ -73,8 +72,8 @@ float calcola_media(Studente_extra s) {
     float somma = 0, count = 0;
 
     for (i = 0; i < N_VOTI; i++) {
-        if (s.voti[i] != -1) {
-            somma = somma + s.voti[i];
+        if (s.stato.voti[i] != -1) {
+            somma = somma + s.stato.voti[i];
             count++;
         }
     }
@@ -104,14 +103,14 @@ int completato_percorso(Studente_extra s) {
 
         for (i = 0; i < N_VOTI && completato == 0; i++) {
 
-            if (s.voti[i] == -1) {
+            if (s.stato.voti[i] == -1) {
                 completato = 1;
             }
         }
     }
 
     if (completato == 1) {
-        s.media = calcola_media (s);
+        s.stato.media = calcola_media (s);
         return 1;
     } else {
         return 0;

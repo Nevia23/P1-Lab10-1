@@ -20,15 +20,14 @@ int main(){
         }
         /*
         fclose(fp);
-        printf("File letto\n\n");
         
-        fp = fopen("studenti.txt","w");
-
         for (i = 0; i < n_stud; i++) {
             if (completato_percorso(s[i]) == 0) {
-                *s[i].stato = "Laureato";
+                s[i].tipo = Laureato;
             }
         }
+
+        fp = fopen("studenti_ord.txt","w");
 
         for(i=n_stud-1; i>=0; i--){
             scrivi_studente(fp, s[i]);

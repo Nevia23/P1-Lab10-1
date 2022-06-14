@@ -5,9 +5,11 @@ typedef struct studenti
 {
     char nome[256];
     char cognome[256];
-    char stato[256];
-    float media;
-    int voti[N_VOTI];
+    enum {Laureato, Non_laureato} tipo;
+    union {
+        unsigned int voti[N_VOTI];
+        float media;
+    } stato;
 } Studente_extra;
 
 int conta_linee(FILE* fp);
